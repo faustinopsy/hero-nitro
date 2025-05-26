@@ -1,0 +1,495 @@
+:root {
+    --sky-gradient-top-day: #0b64a7;
+    --sky-gradient-bottom-day: #6ed0f0;
+    --mountain-color-day-far: #424951;
+    --mountain-color-day-near: #34775a;
+    --foreground-color-day: #124a06;
+    --sun-color: #FFD700;
+    --hero-text-color-day: #1E2A3B;
+    --stars-opacity-day: 0;
+    --navbar-logo-text-color-day: #fbfbfb;
+    --navbar-link-text-color-day: #f7f8f9;
+    --navbar-link-hover-text-color-day: #c0e909;
+
+    --sky-gradient-top-night: #1A1F3B;
+    --sky-gradient-bottom-night: #2C2A6B;
+    --mountain-color-night-far: #101227;
+    --mountain-color-night-near: #1E2041;
+    --foreground-color-night: #080A16;
+    --moon-color: #F0E68C;
+    --hero-text-color-night: #FFFFFF;
+    --stars-opacity-night: 1;
+    --navbar-logo-text-color-night: #FFFFFF;
+    --navbar-link-text-color-night: #f7f7f7;
+    --navbar-link-hover-text-color-night: #FFFFFF;
+
+    --current-sky-top: var(--sky-gradient-top-night);
+    --current-sky-bottom: var(--sky-gradient-bottom-night);
+    --current-mountain-far: var(--mountain-color-night-far);
+    --current-mountain-near: var(--mountain-color-night-near);
+    --current-foreground-color: var(--foreground-color-night);
+    --current-celestial-color: var(--moon-color);
+    --current-hero-text-color: var(--hero-text-color-night);
+    --current-stars-opacity: var(--stars-opacity-night);
+    --current-navbar-logo-text-color: var(--navbar-logo-text-color-night);
+    --current-navbar-link-text-color: var(--navbar-link-text-color-night);
+    --current-navbar-link-hover-text-color: var(--navbar-link-hover-text-color-night);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0A0F1F;
+    color: #E0E0E0;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--hero-text-color-day);
+}
+
+.main-header {
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: linear-gradient(to bottom, #00000051, transparent 70%);
+    backdrop-filter: blur(10px);
+}
+
+.logo-container {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--current-navbar-logo-text-color);
+    transition: color 1s ease;
+}
+
+.logo-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('img/icon1.svg');
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.main-nav a {
+    margin-left: 25px;
+    color: var(--current-navbar-link-text-color);
+    font-size: 0.9em;
+    transition: color 1s ease;
+}
+
+.main-nav a:hover {
+    color: var(--current-navbar-link-hover-text-color);
+}
+
+.login-btn {
+    background-color: #3A3D9A;
+    color: #FFF;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.login-btn:hover {
+    background-color: #4A4DBA;
+}
+
+.hero {
+    position: relative;
+    height: 700px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(to bottom, var(--current-sky-top), var(--current-sky-bottom) 60%);
+    color: var(--current-hero-text-color);
+    padding-top: 100px;
+    transition: background 1s ease, color 1s ease;
+}
+
+.hero-sky {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.celestial-body {
+    width: 70px;
+    height: 70px;
+    background-color: var(--current-celestial-color);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 0 25px 5px var(--current-celestial-color);
+    top: 15%;
+    left: 70%;
+    transition: background-color 1s ease, box-shadow 1s ease, top 3s linear, left 3s linear;
+    z-index: 2;
+}
+
+.hero-sky::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow:
+        50px 100px 0 0px #FFF,
+        150px 80px 0 1px #FFF,
+        250px 120px 0 0px #FFF,
+        350px 50px 0 1px #FFF,
+        50vw 20vh 0 0px #FFF,
+        80vw 30vh 0 1px #FFF,
+        10vw 50vh 0 0px #FFF,
+        90vw 10vh 0 1px #FFF,
+        25px 150px 0 0px rgba(255, 255, 255, 0.7),
+        175px 40px 0 0px rgba(255, 255, 255, 0.7),
+        300px 180px 0 0px rgba(255, 255, 255, 0.7),
+        60vw 40vh 0 0px rgba(255, 255, 255, 0.7),
+        5vw 70vh 0 0px rgba(255, 255, 255, 0.7);
+    animation: twinkle 5s infinite alternate;
+    opacity: var(--current-stars-opacity);
+    transition: opacity 1s ease;
+}
+
+@keyframes twinkle {
+    0% { opacity: var(--current-stars-opacity); }
+    100% { opacity: calc(var(--current-stars-opacity) * 0.7); }
+}
+
+.hero-mountains {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 45%;
+    z-index: 3;
+}
+
+.hero-mountains::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    background: var(--current-mountain-far);
+    clip-path: polygon(0% 100%, 0% 60%, 15% 40%, 30% 55%, 50% 20%, 70% 60%, 85% 45%, 100% 70%, 100% 100%);
+    z-index: 1;
+    transition: background 1s ease;
+}
+
+.hero-mountains::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background: var(--current-mountain-near);
+    clip-path: polygon(0% 100%, 0% 70%, 20% 50%, 40% 65%, 60% 35%, 75% 55%, 90% 50%, 100% 80%, 100% 100%);
+    z-index: 2;
+    transition: background 1s ease;
+}
+
+.hero-foreground-elements {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 4;
+}
+
+.hero-foreground-elements::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--current-foreground-color);
+    clip-path: polygon(
+        0 100%, 0 60%, 5% 55%, 10% 62%, 15% 50%, 20% 58%, 25% 52%, 30% 60%, 35% 55%, 40% 63%,
+        45% 50%, 50% 59%, 55% 53%, 60% 61%, 65% 54%, 70% 60%, 75% 56%, 80% 62%, 85% 53%,
+        90% 60%, 95% 55%, 100% 65%, 100% 100%
+    );
+    z-index: 1;
+    transition: background 1s ease;
+}
+
+.character-placeholder {
+    position: absolute;
+    bottom: 20px;
+    right: 10%;
+    width: 120px;
+    height: 200px;
+    background-image: url('img/placeholder-character.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    z-index: 5;
+    filter: drop-shadow(0 0 10px rgba(58, 61, 154, 0.7));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: left;
+    color: var(--current-hero-text-color);
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: 10%;
+    padding-bottom: 100px;
+}
+
+.hero-content h1 {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cta-button {
+    background-color: #7E57C2;
+    color: #FFF;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(126, 87, 194, 0.4);
+}
+
+.cta-button:hover {
+    background-color: #673AB7;
+}
+
+.black-advantage {
+    padding: 80px 50px;
+    background-color: #0A0F1F;
+    text-align: center;
+}
+
+.black-advantage h2 {
+    font-size: 2em;
+    color: #FFF;
+    margin-bottom: 15px;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.advantages-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    padding: 0 5%;
+}
+
+.advantage-item {
+    flex-basis: calc(33.333% - 40px);
+    margin: 20px;
+    text-align: left;
+    max-width: 300px;
+}
+
+.advantage-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #3A3D9A;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.icon-expertise {
+    background-image: url('img/icon-expertise.svg');
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.icon-technology {
+    background-image: url('img/icon-technology.svg');
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.icon-advice {
+    background-image: url('img/icon-advice.svg');
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.advantage-item h3 {
+    font-size: 1.4em;
+    color: #FFF;
+    margin-bottom: 10px;
+}
+
+.advantage-item p {
+    font-size: 0.9em;
+    color: #B0B0B0;
+    line-height: 1.6;
+}
+
+.analysis-wealth {
+    padding: 80px 5%;
+    background-color: #0F142B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+    
+}
+
+.analysis-content {
+    flex-basis: 50%;
+    z-index: 2;
+    color: #FFF;
+}
+
+.analysis-content h4 {
+    font-size: 0.9em;
+    color: #7E57C2;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.analysis-content h2 {
+    font-size: 2.5em;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+.analysis-content p {
+    font-size: 1em;
+    color: #C0C0C0;
+    line-height: 1.7;
+    max-width: 80%;
+}
+
+.constellation-background {
+    flex-basis: 50%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.character-looking-up-placeholder {
+    width: 200px;
+    height: 300px;
+    background-image: url('img/placeholder-character-looking-up.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(58, 61, 154, 0.7));
+}
+
+.constellation-background::before,
+.constellation-background::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(126, 87, 194, 0.5);
+    z-index: 0;
+}
+
+.constellation-background::before {
+    width: 2px;
+    height: 200px;
+    top: 20%;
+    left: 30%;
+    transform: rotate(30deg);
+    box-shadow: 0 0 5px rgba(126, 87, 194, 0.8);
+}
+
+.constellation-background::after {
+    width: 2px;
+    height: 195px;
+    top: 4%;
+    left: 70%;
+    transform: rotate(-25deg);
+    box-shadow: 0 0 5px rgba(126, 87, 194, 0.8);
+    z-index: 6;
+}
+
+.footer-nav{
+    background-color: #03061e;
+    padding: 20px 50px;
+    text-align: center;
+    color: var(--current-navbar-link-text-color);
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 26px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+    position: absolute;
+    left: 20px;
+}
+
+.hamburger-bar {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu.menu-open .hamburger-bar:nth-child(1) {
+    transform: translateY(9.5px) rotate(45deg);
+}
+.hamburger-menu.menu-open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.menu-open .hamburger-bar:nth-child(3) {
+    transform: translateY(-9.5px) rotate(-45deg);
+}
+
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.login-btn-mobile-nav {
+    display: none;
+}
