@@ -4,14 +4,16 @@ import { AtualizaCorpoCeleste } from './celestialController.js';
 import { initializeHamburgerMenu } from './menuController.js';
 
 function iniciaCicloCeleste() {
-    const { hora, eDia } = buscaInfHora();
-    console.log(`Hora atual: ${hora}, É dia? ${eDia}`);
+    const { hora, minutos, eDia } = buscaInfHora();
+    console.log(`Hora atual: ${hora}:${minutos}, É dia? ${eDia}`);
     updateTheme(eDia);
-    AtualizaCorpoCeleste(eDia, hora);
+    AtualizaCorpoCeleste(eDia, hora, minutos);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     iniciaCicloCeleste();
     initializeHamburgerMenu();
-    setInterval(iniciaCicloCeleste, 60 * 60 * 1000);
+    setInterval(() => {
+        iniciaCicloCeleste();
+    }, 60 * 1000);
 });

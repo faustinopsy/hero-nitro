@@ -26,7 +26,7 @@ export function AtualizaCorpoCeleste(eDia, horaAtual) {
         normalizaHora = (horaAtual >= 18) ? (horaAtual - 18) : (horaAtual + 6); 
     }
 
-    const progress = (normalizaHora / 11) * 100;
+    const progress = (normalizaHora / 12) * 100;
     let xPercent = eDia ? progress : 100 - progress;
 
     const yAmplitude = 40;
