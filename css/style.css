@@ -5,7 +5,7 @@
     --mountain-color-day-near: #34775a;
     --foreground-color-day: #124a06;
     --sun-color: #FFD700;
-    --hero-text-color-day: #1E2A3B;
+    --hero-text-color-day: #ffffff;
     --stars-opacity-day: 0;
     --navbar-logo-text-color-day: #fbfbfb;
     --navbar-link-text-color-day: #f7f8f9;
@@ -312,6 +312,9 @@ a {
 }
 
 .advantage-item {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
     flex-basis: calc(33.333% - 40px);
     margin: 20px;
     text-align: left;
@@ -474,10 +477,19 @@ a {
     transition: all 0.3s ease-in-out;
 }
 
+.hamburger-bar-center {
+    display: block;
+    width: 125%;
+    height: 3px;
+    background-color: rgb(255, 230, 0);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
 .hamburger-menu.menu-open .hamburger-bar:nth-child(1) {
     transform: translateY(9.5px) rotate(45deg);
 }
-.hamburger-menu.menu-open .hamburger-bar:nth-child(2) {
+.hamburger-menu.menu-open .hamburger-bar-center:nth-child(2) {
     opacity: 0;
 }
 .hamburger-menu.menu-open .hamburger-bar:nth-child(3) {
