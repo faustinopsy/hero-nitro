@@ -1,10 +1,30 @@
-export function buscaInfHora() {
-    const agora = new Date();
-    let hora = agora.getHours();
-    let minutos = agora.getMinutes();
-    //hora = 2;
-    //minutos = 5;
+class TimeController {
+    constructor() {
+        this.offsetMs = 0;
+    }
 
-    const eDia = hora >= 6 && hora < 18;
-    return { hora, minutos, eDia };
+    now() {
+        return new Date(Date.now() + this.offsetMs);
+    }
+
+    setTime(hora, minutos) {
+        const realNow = new Date();
+        const virtualNow = new Date(realNow);
+
+        virtualNow.setHours(hora);
+        virtualNow.setMinutes(minutos);
+        virtualNow.setSeconds(0);
+
+        this.offsetMs = virtualNow.getTime() - realNow.getTime();
+    }
+
+    adjustHours(delta) {
+        this.offsetMs += delta * 60 * 60 * 1000;
+    }
+
+    adjustMinutes(delta) {
+        this.offsetMs += delta * 60 * 1000;
+    }
 }
+
+export const timeController = new TimeController();
